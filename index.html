@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <audio id="bgMusic" loop>
+        <source src="Jovanie - Addicted (HAPPY BIRTHDAY)(TIKTOK) [DJ MATH.D EDIT] (mp3cut.net).mp3" type="audio/mp3">
+    </audio>   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun!</title>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ebc8c8;
+            background: url('bg.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: rgb(3, 0, 0);
+            border-color: aliceblue;
+        }
+        .overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 10;
+            color: white;
+            font-size: 30px;
+            transition: opacity 3s ease;
+        }
+        .hidden { display: none; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #typingText {
+            font-size: 18px;
+            margin-top: 20px;
+            margin-left: 100px;
+            margin-right: 100px;
+            padding-left: 200px;
+            padding-right: 200px;
+            white-space: pre-wrap;
+            opacity: 0;
+        }
+        #photoGallery img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        #playVideoBtn, #whatsappBtn {
+            padding: 10px 20px;
+            position:absolute;
+            margin-left: 50%;
+            margin-right: 50%;
+            font-size: 18px;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        #videoSection {
+            display: none;
+            width: 640px;
+            height: 360px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: black;
+            z-index: 20;
+        }
+        #videoSection video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .falling-heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-10%); opacity: 1; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+        #happyBirthday {
+            font-size: 30px;
+            display: none;
+            color: rgb(147, 71, 84);
+            border: black;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay">
+        <p>❤️Happy Birthday, Zayana Fidinika❤️</p>
+        <img src="music-removebg-preview.png" style="width: 40px; height: auto;"> 
+    </div>
+
+    <div id="content" class="hidden">
+        <div id="photoGallery">
+            <img src="1.jpg" alt="Foto 1">
+            <img src="2.jpg" alt="Foto 2">
+            <img src="3.jpg" alt="Foto 3">
+        </div>
+        <div id="typingText"></div>
+        <button id="playVideoBtn">Next</button>
+        <div id="videoSection">
+            <video id="surpriseVideo" controls>
+                <source src="hbd yana.mp4" type="video/mp4">
+            </video>
+        </div>
+        <h1 id="happyBirthday">🎉 Wish U All The Best, Pretty Girl! 🎉</h1>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("content").classList.remove("hidden");
+                showPhotos();
+            }, 3000);
+        });
+
+        function showPhotos() {
+            let images = document.querySelectorAll("#photoGallery img");
+            let index = 0;
+            function fadeInNext() {
+                if (index < images.length) {
+                    images[index].style.opacity = "1";
+                    setTimeout(fadeInNext, 1000);
+                    index++;
+                } else {
+                    setTimeout(hidePhotos, 2000);
+                }
+            }
+            fadeInNext();
+        }
+
+        function hidePhotos() {
+            document.getElementById("photoGallery").style.display = "none";
+            document.getElementById("typingText").style.opacity = "1";
+            startTyping();
+        }
+
+        function startTyping() {
+            const text = "Happy birthday, cantiik!🎉🥳 Semoga di hari spesial ini, kamu makin bahagia, sehat, dan sukses dalam segala hal. Makasih udah jadi sahabat yang selalu ada, tempat curhat, ketawa bareng, dan gila-gilaan bareng. Semoga semua yang kamu impikan bisa tercapai, dan selalu dipenuhi kebahagiaan. Maaf kalo aku sering slow respon, hehe. Pokoknya, stay awesome dan jangan pernah berubah! 🎂🎁💕";
+            let index = 0;
+            const typingElement = document.getElementById("typingText");
+            function typeCharacter() {
+                if (index < text.length) {
+                    typingElement.innerHTML += text[index];
+                    index++;
+                    setTimeout(typeCharacter, 50);
+                } else {
+                    document.getElementById("playVideoBtn").style.display = "block";
+                }
+            }
+            typeCharacter();
+        }
+
+        document.getElementById("playVideoBtn").addEventListener("click", function () {
+            document.getElementById("typingText").style.display = "none";
+            document.getElementById("playVideoBtn").style.display = "none";
+            document.getElementById("videoSection").style.display = "block";
+            let video = document.getElementById("surpriseVideo");
+            video.play();
+            video.onended = function () {
+                document.getElementById("videoSection").style.display = "none";
+                
+                let happyText = document.getElementById("happyBirthday");
+                happyText.style.display = "block";  // Munculin elemen
+                setTimeout(() => {
+                    happyText.style.opacity = "1";  // Efek fade in
+                }, 100);
+                
+                createFallingHearts();
+            };
+
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let bgMusic = document.getElementById("bgMusic");
+            let video = document.getElementById("surpriseVideo");
+            let playButton = document.getElementById("playVideoBtn");
+            let userInteracted = false;
+
+            // Fungsi untuk mulai musik hanya setelah interaksi user (menghindari autoplay block)
+            function startMusic() {
+                if (!userInteracted) {
+                    bgMusic.play().catch(error => console.log("Autoplay blocked:", error));
+                    userInteracted = true;
+                }
+            }
+
+            // Mulai musik saat user pertama kali klik di halaman
+            document.body.addEventListener("click", startMusic, { once: true });
+
+            // Stop musik saat video diputar
+            playButton.addEventListener("click", function () {
+                if (!bgMusic.paused) {
+                    bgMusic.pause();
+                }
+                video.play();
+            });
+
+            // Saat video selesai, musik nyala lagi
+            video.onended = function () {
+                document.getElementById("videoSection").style.display = "none";
+
+                let happyText = document.getElementById("happyBirthday");
+                happyText.style.display = "block";
+                happyText.style.opacity = "0";
+                setTimeout(() => { happyText.style.opacity = "1"; }, 500); // Fade in effect
+
+                // Pastikan musik mulai dari awal setelah video selesai
+                setTimeout(() => {
+                    bgMusic.currentTime = 0;
+                    bgMusic.play().catch(error => console.log("Autoplay blocked:", error));
+                }, 500);
+
+                createFallingHearts();
+            };
+        });
+
+
+
+        function createFallingHearts() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("falling-heart");
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
